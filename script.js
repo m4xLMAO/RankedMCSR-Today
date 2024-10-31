@@ -6,7 +6,8 @@ async function fetchTodayStats() {
     statsDiv.innerHTML = 'Fetching data...';
 
     try {
-        const response = await fetch(`https://mcsr-stats.memerson.xyz/api/matches?timeframe=12 hours&username=${username}`);
+        const corsProxy = "https://cors-anywhere.herokuapp.com/";
+        const response = await fetch(`${corsProxy}https://mcsr-stats.memerson.xyz/api/matches?timeframe=12 hours&username=${username}`);
         const data = await response.json();
 
         if (data.error) {
