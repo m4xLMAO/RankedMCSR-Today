@@ -7,7 +7,7 @@ async function fetchTodayStats() {
 
     try {
         // Only call your Vercel backend
-        const response = await fetch(`https://ranked-mcsr-today.vercel.app//api/fetch-stats?username=${username}`);
+        const response = await fetch(`https://ranked-mcsr-today.vercel.app/api/fetch-stats?username=${username}`);
         const data = await response.json();
 
         if (data.error) {
