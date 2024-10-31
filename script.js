@@ -6,18 +6,17 @@ async function fetchTodayStats() {
     statsDiv.innerHTML = 'Fetching data...';
 
     try {
-        const corsProxy = "https://cors-anywhere.herokuapp.com/";
-        const response = await fetch(`${corsProxy}https://mcsr-stats.memerson.xyz/api/matches?timeframe=12 hours&username=${username}`);
+        // Only call your Vercel backend
+        const response = await fetch(`https://your-vercel-backend-url.vercel.app/api/fetch-stats?username=${username}`);
         const data = await response.json();
 
         if (data.error) {
             statsDiv.innerHTML = `<p class="error">Error: ${data.error}</p>`;
         } else {
             const { totalEloChange, wonMatchesCount, lossMatchesCount, drawCount } = data;
-
             const totalMatches = wonMatchesCount + lossMatchesCount;
-            let winPercentage = totalMatches ? ((wonMatchesCount / totalMatches) * 100).toFixed(2) + '%' : 'Undefined (division by zero)';
-            
+            const winPercentage = totalMatches ? ((wonMatchesCount / totalMatches) * 100).toFixed(2) + '%' : 'Undefined (division by zero)';
+
             statsDiv.innerHTML = `
                 <h3>${username}'s Stats for Today</h3>
                 <p><strong>Elo Change:</strong> ${totalEloChange}</p>
